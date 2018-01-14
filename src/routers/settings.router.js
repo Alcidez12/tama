@@ -2,7 +2,7 @@
 const BaseRouter = require('wapi-core').BaseRouter;
 const HTTPCodes = require('wapi-core').Constants.HTTPCodes;
 const settingController = require('../controller/setting.controller');
-
+const winston = require('winston');
 class SettingsRouter extends BaseRouter {
     constructor() {
         super();
@@ -14,6 +14,7 @@ class SettingsRouter extends BaseRouter {
                 }
                 return {status: HTTPCodes.OK, setting};
             } catch (e) {
+                winston.error(e);
                 return {status: HTTPCodes.INTERNAL_SERVER_ERROR};
             }
 
@@ -26,6 +27,7 @@ class SettingsRouter extends BaseRouter {
                 let setting = await settingController.updateSetting(req.params.type, req.params.id, req.account.id, req.body);
                 return {status: HTTPCodes.OK, setting};
             } catch (e) {
+                winston.error(e);
                 return {status: HTTPCodes.INTERNAL_SERVER_ERROR};
             }
 
@@ -38,6 +40,7 @@ class SettingsRouter extends BaseRouter {
                 }
                 return {status: HTTPCodes.OK, message: 'Setting deleted', setting};
             } catch (e) {
+                winston.error(e);
                 return {status: HTTPCodes.INTERNAL_SERVER_ERROR};
             }
         });
@@ -49,6 +52,7 @@ class SettingsRouter extends BaseRouter {
                 }
                 return {status: HTTPCodes.OK, subsettings};
             } catch (e) {
+                winston.error(e);
                 return {status: HTTPCodes.INTERNAL_SERVER_ERROR};
             }
         });
@@ -60,6 +64,7 @@ class SettingsRouter extends BaseRouter {
                 }
                 return {status: HTTPCodes.OK, subsetting};
             } catch (e) {
+                winston.error(e);
                 return {status: HTTPCodes.INTERNAL_SERVER_ERROR};
             }
         });
@@ -71,6 +76,7 @@ class SettingsRouter extends BaseRouter {
                 let subsetting = await settingController.updateSubsetting(req.params.type, req.params.id, req.account.id, req.params.subtype, req.params.subid, req.body);
                 return {status: HTTPCodes.OK, subsetting};
             } catch (e) {
+                winston.error(e);
                 return {status: HTTPCodes.INTERNAL_SERVER_ERROR};
             }
         });
@@ -82,6 +88,7 @@ class SettingsRouter extends BaseRouter {
                 }
                 return {status: HTTPCodes.OK, message: 'Subsetting deleted', subsetting};
             } catch (e) {
+                winston.error(e);
                 return {status: HTTPCodes.INTERNAL_SERVER_ERROR};
             }
         });

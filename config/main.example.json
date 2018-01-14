@@ -1,0 +1,7 @@
+{
+  "host": "127.0.0.1",
+  "port": 9040,
+  "dburl": "mongodb://localhost/tama-development",
+  "env": "development",
+  "irohUrl": "http://localhost:9010"
+}

@@ -13,6 +13,8 @@ const permNodes = require('./permNodes.json');
 const GenericRouter = require('wapi-core').GenericRouter;
 const WildcardRouter = require('wapi-core').WildcardRouter;
 
+const SettingsRouter = require('./routers/settings.router');
+
 const AuthMiddleware = require('wapi-core').AccountAPIMiddleware;
 
 winston.remove(winston.transports.Console);
@@ -21,7 +23,7 @@ winston.add(winston.transports.Console, {
     colorize: true,
 });
 
-let init = async() => {
+let init = async () => {
     let config;
     try {
         config = require('../config/main.json');
@@ -55,13 +57,13 @@ let init = async() => {
     app.use(cors());
 
     // Auth middleware
-    app.use(new AuthMiddleware('http://localhost:9010', 'My awesome API V1').middleware());
+    app.use(new AuthMiddleware(config.irohUrl, `${pkg.name}/${pkg.version}`).middleware());
 
     // Routers
-    app.use(new GenericRouter(pkg.version, `Welcome to the ${pkg.name}`, `${pkg.name}-${config.env}`, permNodes).router());
+    app.use(new GenericRouter(pkg.version, `Welcome to ${pkg.name}`, `${pkg.name}-${config.env}`, permNodes).router());
 
     // add custom routers here:
-
+    app.use(new SettingsRouter().router());
     // Always use this last
     app.use(new WildcardRouter().router());
 

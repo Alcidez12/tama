@@ -23,7 +23,7 @@ winston.add(winston.transports.Console, {
     colorize: true,
 });
 
-let init = async () => {
+let init = async() => {
     let config;
     try {
         config = require('../config/main.json');
@@ -57,7 +57,7 @@ let init = async () => {
     app.use(cors());
 
     // Auth middleware
-    app.use(new AuthMiddleware(config.irohUrl, `${pkg.name}/${pkg.version}`).middleware());
+    app.use(new AuthMiddleware(config.irohUrl, `${pkg.name}/${pkg.version}`, config.whitelist).middleware());
 
     // Routers
     app.use(new GenericRouter(pkg.version, `Welcome to ${pkg.name}`, `${pkg.name}-${config.env}`, permNodes).router());

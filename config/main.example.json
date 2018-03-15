@@ -5,6 +5,11 @@
   "env": "development",
   "irohUrl": "http://localhost:9010",
   "track": "",
+  "registration": {
+    "enabled": false,
+    "host": "",
+    "token": ""
+  },
   "whitelist": [
     {
       "path": "/"

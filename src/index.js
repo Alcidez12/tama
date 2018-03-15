@@ -10,12 +10,12 @@ mongoose.Promise = Promise
 const pkg = require('../package.json')
 const permNodes = require('./permNodes.json')
 
-const GenericRouter = require('wapi-core').GenericRouter
-const WildcardRouter = require('wapi-core').WildcardRouter
+const GenericRouter = require('@weeb_services/wapi-core').GenericRouter
+const WildcardRouter = require('@weeb_services/wapi-core').WildcardRouter
 
 const SettingsRouter = require('./routers/settings.router')
 
-const AuthMiddleware = require('wapi-core').AccountAPIMiddleware
+const AuthMiddleware = require('@weeb_services/wapi-core').AccountAPIMiddleware
 
 winston.remove(winston.transports.Console)
 winston.add(winston.transports.Console, {

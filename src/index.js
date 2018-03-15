@@ -16,6 +16,7 @@ const WildcardRouter = require('@weeb_services/wapi-core').WildcardRouter
 const SettingsRouter = require('./routers/settings.router')
 
 const AuthMiddleware = require('@weeb_services/wapi-core').AccountAPIMiddleware
+const TrackMiddleware = require('@weeb_services/wapi-core').TrackingMiddleware
 
 winston.remove(winston.transports.Console)
 winston.add(winston.transports.Console, {
@@ -58,6 +59,10 @@ const init = async () => {
 
   // Auth middleware
   app.use(new AuthMiddleware(config.irohUrl, `${pkg.name}/${pkg.version}`, config.whitelist).middleware())
+
+  if (config.track) {
+    app.use(new TrackMiddleware(pkg.name, pkg.version, config.env, config.track).middleware())
+  }
 
   // Routers
   app.use(new GenericRouter(pkg.version, `Welcome to ${pkg.name}`, `${pkg.name}-${config.env}`, permNodes).router())

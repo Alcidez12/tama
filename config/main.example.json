@@ -4,6 +4,7 @@
   "dburl": "mongodb://localhost/tama-development",
   "env": "development",
   "irohUrl": "http://localhost:9010",
+  "track": "",
   "whitelist": [
     {
       "path": "/"

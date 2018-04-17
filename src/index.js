@@ -39,7 +39,7 @@ winston.add(winston.transports.Console, {
 const init = async () => {
 
   try {
-    await mongoose.connect(config.dburl, {useMongoClient: true})
+    await mongoose.connect(config.dburl)
   } catch (e) {
     winston.error('Unable to connect to Mongo Server.')
     return process.exit(1)
